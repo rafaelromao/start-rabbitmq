@@ -10,7 +10,7 @@ Powershell command to build and start a RabbitMQ docker container via powershell
 
 ## What will it do?
 1. Run Start-Docker
-2. Build a RabbitMQ docker image using the provided .DockerFile\DockerFile, if necessary
+2. Build a RabbitMQ docker image using the provided DockerFile, if necessary
 3. Run the RabbitMQ docker image, if necessary
 4. Restart the RabbitMQ docker image, if it is stopped or already running
 
