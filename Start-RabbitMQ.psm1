@@ -7,14 +7,14 @@ function Start-RabbitMQ() {
 	$imageExists = docker images | grep rabbitmq | grep rstests
 	if ($containerId -eq $null) {
 		Write-Host "Creating image..."
-		docker build --rm=true -t rabbitmq:rstests $PSScriptRoot
+		docker build --rm=true -t rabbitmq:rstests $PSScriptRoot 2> $null | Out-Null
 	}
 	# Check if container exists
-	$existingContainerId = docker --tlsverify=false ps -a -q --filter="name=rabbitmq-rstests"
+	$existingContainerId = docker ps -a -q --filter="name=rabbitmq-rstests"
 	if ($existingContainerId -eq $null) {
 		# Creates and starts the container
 		Write-Host "Creating and starting container..."
-		docker run --name=rabbitmq-rstests -d -p 5672:5672 -p 15672:15672 rabbitmq:rstests
+		docker run --name=rabbitmq-rstests -d -p 5672:5672 -p 15672:15672 rabbitmq:rstests 2> $null | Out-Null
 	} else {
 		$runningContainerId = docker ps -q --filter="name=rabbitmq-rstests"
 		if ($runningContainerId -ne $null) {
