@@ -5,7 +5,7 @@ function Start-RabbitMQ() {
 	start-docker
 	# Check if the image exists
 	$imageExists = docker images | grep rabbitmq | grep rstests
-	if ($containerId -eq $null) {
+	if ($imageExists -eq $null) {
 		Write-Host "Creating RabbitMQ image..."
 		docker build --rm=true -t rabbitmq:rstests $PSScriptRoot 2> $null | Out-Null
 	}
